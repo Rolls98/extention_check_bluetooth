@@ -7,7 +7,10 @@
         }
     },
     "icons": {
-        "16": "favicon.png"
+        "16": "icon_blue.png",
+        "32": "icon_blue.png",
+        "48": "icon_blue.png",
+        "128": "icon_blue.png"
     },
     "manifest_version": 2,
     "name": "check_bluetooth",

@@ -107,11 +107,11 @@ try {
     chrome.bluetooth.startDiscovery(function () {
         console.log("start search....")
         // Stop discovery after 30 seconds.
-        setTimeout(function () {
-            chrome.bluetooth.stopDiscovery(function () {
-                console.log("stop search....");
-            });
-        }, 600000);
+        // setTimeout(function () {
+        //     chrome.bluetooth.stopDiscovery(function () {
+        //         console.log("stop search....");
+        //     });
+        // }, 600000);
     });
 } catch (err) {
     console.log("erreur ", err)
