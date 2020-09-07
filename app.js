@@ -69,7 +69,7 @@ try {
     var device_names = {};
     var updateDeviceName = function (device) {
         device_names[device.address] = device.name;
-        console.log("new device ", document.querySelector("#" + "f" + device.address.replace(/:/g, "")));
+        //console.log("new device ", document.querySelector("#" + "f" + device.address.replace(/:/g, "")));
         if (!document.querySelector("#" + "f" + device.address.replace(/:/g, ""))) {
             console.log("cree");
             let li = document.createElement("li");
@@ -107,11 +107,11 @@ try {
     chrome.bluetooth.startDiscovery(function () {
         console.log("start search....")
         // Stop discovery after 30 seconds.
-        // setTimeout(function () {
-        //     chrome.bluetooth.stopDiscovery(function () {
-        //         console.log("stop search....");
-        //     });
-        // }, 600000);
+        setTimeout(function () {
+            chrome.bluetooth.stopDiscovery(function () {
+                console.log("stop search....");
+            });
+        }, 30000);
     });
 } catch (err) {
     console.log("erreur ", err)
