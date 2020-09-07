@@ -1,11 +1,16 @@
 {
     "app": {
         "background": {
-            "scripts": [ "background.js" ]
+            "scripts": [
+                "background.js"
+            ]
         }
+    },
+    "icons": {
+        "16": "favicon.png"
     },
     "manifest_version": 2,
     "name": "check_bluetooth",
-    "bluetooth":{},
+    "bluetooth": {},
     "version": "1.0.0"
 }

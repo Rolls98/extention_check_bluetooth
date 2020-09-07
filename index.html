@@ -7,16 +7,23 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles/bootstrap.css">
     <style>
-        ul{
-            max-height:600px;
-            overflow-y:auto;
+        ul {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            padding: 5px;
+
+        }
+
+        ul h1 {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Service Bluetooth</h1>
+        <!-- <h1>Service Bluetooth</h1>
         <div class="form-group">
             <label for="services">Selectionner un service</label>
             <select class="form-control" value="" id="services">
@@ -61,20 +68,17 @@
                 <option value="user_data">user_data</option>
                 <option value="weight_scale">weight_scale</option>
             </select>
-        </div>
+        </div> -->
         <ul class="list list-group list-group-flush">
             <h1>Listes des Bluetooth(s)</h1>
         </ul>
-        <button class="btn btn-primary" id="active">Recherche</button>
-        <div class="mt-5 border p-2 infoDevice">
-        </div>
+        <!-- <button class="btn btn-primary" id="active">Recherche</button> -->
+        <!-- <div class="mt-5 border p-2 infoDevice">
+        </div> -->
     </div>
-    <script src="vendors/jquery.js"
-        ></script>
-    <script src="vendors/popper.js"
-        ></script>
-    <script src="vendors/bootstrap.js"
-       ></script>
+    <script src="vendors/jquery.js"></script>
+    <script src="vendors/popper.js"></script>
+    <script src="vendors/bootstrap.js"></script>
     <script src="app.js"></script>
 </body>
 

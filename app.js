@@ -1,53 +1,62 @@
-let btn = document.querySelector("#active");
-let info = document.querySelector(".infoDevice");
-let lists = document.querySelector("#services");
-info.style.display = "none"
-let options = {
-    acceptAllDevices: true
-}
+// let btn = document.querySelector("#active");
+// let info = document.querySelector(".infoDevice");
+// let lists = document.querySelector("#services");
+// info.style.display = "none"
+// let options = {
+//     acceptAllDevices: true
+// }
 
-lists.addEventListener("change", (e) => {
-    console.log(e.target.value);
-    if (e.target.value !== "all") {
+// lists.addEventListener("change", (e) => {
+//     console.log(e.target.value);
+//     if (e.target.value !== "all") {
 
 
-        options = { filters: [{ services: [e.target.value] }] };
-    } else {
-        options = { acceptAllDevices: true }
-    }
-})
+//         options = { filters: [{ services: [e.target.value] }] };
+//     } else {
+//         options = { acceptAllDevices: true }
+//     }
+// })
 
-btn.addEventListener("click", (e) => {
-    e.preventDefault();
-    info.style.display = ""
-    info.innerHTML = "<p>Recherche d'un appareil Bluetooth ...</p>"
-    navigator.bluetooth.requestDevice(options).then((device) => {
-        console.log("device ", device)
-        console.log("connect ", device.gatt.connect())
-        info.innerHTML = `
-            <p> > Nom de l'appareil : ${device.name} </p>
-            <p> > Id : ${device.id} </p> 
-            <p> > Connecté : ${device.gatt.connected} </p>
-        `
-        return device.gatt.connect();
-    }).then(server => {
-        console.log(server);
-        info.innerHTML = `
-            <p> > Nom de l'appareil : ${server.name} </p>
-            <p> > Id : ${server.id} </p> 
-            <p> > Connecté : ${server.gatt.connected} </p>
-        `
-        console.log("server ", server)
-    }).catch(err => {
-        console.log("err ", err);
-        info.innerHTML = "<p>Aucun appareil selectionné</p>"
-    })
+// btn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     info.style.display = ""
+//     info.innerHTML = "<p>Recherche d'un appareil Bluetooth ...</p>"
+//     navigator.bluetooth.requestDevice(options).then((device) => {
+//         console.log("device ", device)
+//         console.log("connect ", device.gatt.connect())
+//         info.innerHTML = `
+//             <p> > Nom de l'appareil : ${device.name} </p>
+//             <p> > Id : ${device.id} </p> 
+//             <p> > Connecté : ${device.gatt.connected} </p>
+//         `
+//         return device.gatt.connect();
+//     }).then(server => {
+//         console.log(server);
+//         info.innerHTML = `
+//             <p> > Nom de l'appareil : ${server.name} </p>
+//             <p> > Id : ${server.id} </p> 
+//             <p> > Connecté : ${server.gatt.connected} </p>
+//         `
+//         console.log("server ", server)
+//     }).catch(err => {
+//         console.log("err ", err);
+//         info.innerHTML = "<p>Aucun appareil selectionné</p>"
+//     })
 
-    console.log("click");
-})
+//     console.log("click");
+// })
 
 
 try {
+
+    chrome.bluetooth.getAdapterState(adp => {
+        let p = document.createElement("p");
+
+        console.log(adp.powered);
+        p.innerHTML = "Etat bluetooth : " + (adp.powered ? "activé" : "desactivé");
+
+        document.querySelector(".container").insertBefore(p, document.querySelector(".list"));
+    })
     let ul = document.querySelector(".list");
     // chrome.bluetooth.getDevices(function (devices) {
     //     for (var i = 0; i < devices.length; i++) {
@@ -89,19 +98,20 @@ try {
     chrome.bluetooth.getDevices(function (devices) {
         for (var i = 0; i < devices.length; i++) {
             updateDeviceName(devices[i]);
-
         }
     });
 
+    console.log("test search....")
+
     // Now begin the discovery process.
     chrome.bluetooth.startDiscovery(function () {
-
+        console.log("start search....")
         // Stop discovery after 30 seconds.
         setTimeout(function () {
             chrome.bluetooth.stopDiscovery(function () {
-
+                console.log("stop search....");
             });
-        }, 30000);
+        }, 600000);
     });
 } catch (err) {
     console.log("erreur ", err)
